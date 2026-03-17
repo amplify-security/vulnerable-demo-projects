@@ -24,20 +24,20 @@ $password = $input['password'];
 // VULNERABLE: loose comparison (==) with json_decoded input
 // Exploit 1: {"username":"admin","password":true}   -> true == "s3cur3P@ssw0rd!" is true
 // Exploit 2: {"username":"admin","password":0}       -> 0 == "s3cur3P@ssw0rd!" is true (PHP < 8.0)
-if ($username == ADMIN_USERNAME && $password == ADMIN_PASSWORD) {
-    $_SESSION['logged_in'] = true;
-    $_SESSION['username'] = ADMIN_USERNAME;
-
-    echo json_encode([
-        'success' => true,
-        'message' => 'Login successful.',
-        'redirect' => '/dashboard.php',
-        'session_id' => session_id()
-    ]);
-} else {
-    http_response_code(401);
-    echo json_encode([
-        'success' => false,
-        'message' => 'Invalid credentials.'
-    ]);
-}
+    if ($username == ADMIN_USERNAME && $password == ADMIN_PASSWORD) {
+        $_SESSION['logged_in'] = true;
+        $_SESSION['username'] = ADMIN_USERNAME;
+    
+        echo json_encode([
+            'success' => true,
+            'message' => 'Login successful.',
+            'redirect' => '/dashboard.php',
+            'session_id' => session_id()
+        ]);
+    } else {
+        http_response_code(401);
+        echo json_encode([
+            'success' => false,
+            'message' => 'Invalid credentials.'
+        ]);
+    }
