@@ -24,6 +24,9 @@
     // VULNERABLE: loose comparison (==) with json_decoded input
     // Exploit 1: {"username":"admin","password":true}   -> true == "s3cur3P@ssw0rd!" is true
     // Exploit 2: {"username":"admin","password":0}       -> 0 == "s3cur3P@ssw0rd!" is true (PHP < 8.0)
+    // VULNERABLE: loose comparison (==) with json_decoded input
+    // Exploit 1: {"username":"admin","password":true}   -> true == "s3cur3P@ssw0rd!" is true
+    // Exploit 2: {"username":"admin","password":0}       -> 0 == "s3cur3P@ssw0rd!" is true (PHP < 8.0)
     if ($username == ADMIN_USERNAME && $password == ADMIN_PASSWORD) {
         $_SESSION['logged_in'] = true;
         $_SESSION['username'] = ADMIN_USERNAME;
